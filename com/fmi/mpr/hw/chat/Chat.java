@@ -13,25 +13,22 @@ public class Chat {
         String clientName = scanner.nextLine();
         Client User = new Client(IP, PORT, clientName);
         System.out.println(String.format("\n%s, welcome to the chat room!\n", clientName));
-        User.listen();
         while(true) {
             System.out.println("Please, choose what you want to send: [TEXT/IMAGE/VIDEO] ");
             String messageType = scanner.nextLine();
-            String consoleInput;
             switch (messageType) {
                 case "TEXT":
                     System.out.println("Please, type in the text you want to send!");
-                    consoleInput = scanner.nextLine();
-                    User.sendText(consoleInput);
+                    User.sendText(scanner.nextLine());
                     break;
                 case "IMAGE":
                 case "VIDEO":
                     System.out.println("Please, type in the path to your file!");
-                    // consoleInput = scanner.nextLine();
-                    // User.sendFile(consoleInput);
+                    User.sendFile(scanner.nextLine());
                     break;
                 default:
                         System.out.println("Please, use CAPITAL LETTERS only!");
+                        break;
             }
         }
     }
