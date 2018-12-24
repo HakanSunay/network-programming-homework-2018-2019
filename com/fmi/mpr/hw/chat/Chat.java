@@ -13,7 +13,7 @@ public class Chat {
         String clientName = scanner.nextLine();
         Client User = new Client(IP, PORT, clientName);
         System.out.println(String.format("\n%s, welcome to the chat room!\n", clientName));
-        chatUser.listen();
+        User.listen();
         while(true) {
             System.out.println("Please, choose what you want to send: [TEXT/IMAGE/VIDEO] ");
             String messageType = scanner.nextLine();
