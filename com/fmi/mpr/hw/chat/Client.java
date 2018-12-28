@@ -42,15 +42,14 @@ public class Client {
                 try {
                     DatagramPacket packet = new DatagramPacket(this.buffer, this.buffer.length);
                     this.multicastSocket.receive(packet);
-                    String text = new String(packet.getData(), packet.getOffset(), packet.getLength());
-                    String packetType = text.substring(0,2);
-                    switch (packetType) {
-                        case "#T":
+                    if (packet.getLength() != 0) {
+                        String text = new String(packet.getData(), packet.getOffset(), packet.getLength());
+                        String packetType = text.substring(0, 2);
+                        if (packetType.equals("#T")) {
                             System.out.println(text.substring(2));
-                            break;
-                        default:
+                        } else {
                             this.readFile(packet);
-                            break;
+                        }
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -106,6 +105,7 @@ public class Client {
                 bytesReceived = firstPacket.getData().length;
             }
             out.close();
+            System.out.println("Received " + fileName);
         } catch (IOException e) {
             System.out.println("Failed to receive file!");
             e.printStackTrace();
